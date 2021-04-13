@@ -3,6 +3,6 @@
     "description": "Json Web token",
     "license": "MIT",
     "require": {
-        "php": ">=7.4"
+        "php": ">=7"
     }
 }
