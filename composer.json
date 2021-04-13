@@ -1,6 +1,7 @@
 {
     "name": "chungdasilva/chungnh-orm",
     "description": "Json Web token",
+    "license": "MIT",
     "require": {
         "php": ">=7.4"
     }
