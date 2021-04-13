@@ -1,10 +1,10 @@
 {
     "name": "chungdasilva/chungnh-orm",
-    "description": "Json Web token",
+    "description": "Object Relational Mapping",
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Token\\": "src"
+            "ORM\\": "src"
         }
     }
 }
