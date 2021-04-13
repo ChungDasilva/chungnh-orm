@@ -1,4 +1,5 @@
 <?php
+namespace Token;
 
 class JsonWebToken
 {

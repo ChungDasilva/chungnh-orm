@@ -4,7 +4,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "JWT\\": "chungdasilva/chungnh-orm/src"
+            "Token\\": "src"
         }
     }
 }
