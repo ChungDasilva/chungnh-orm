@@ -1,0 +1,7 @@
+{
+    "name": "chungdasilva/chungnh-orm",
+    "description": "Json Web token",
+    "require": {
+        "php": ">=7.4"
+    }
+}
