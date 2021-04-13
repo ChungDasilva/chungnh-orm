@@ -1,5 +1,10 @@
 {
     "name": "chungdasilva/chungnh-orm",
     "description": "Json Web token",
-    "license": "MIT"
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "JWT\\": "chungdasilva/chungnh-orm/src"
+        }
+    }
 }
