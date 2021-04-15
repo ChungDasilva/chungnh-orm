@@ -4,9 +4,9 @@ namespace ORM\Core;
 class Database
 {
     const HOST = 'localhost';
-    const DB_NAME = 'mvc';
+    const DB_NAME = 'mydb';
     const USERNAME = 'root';
-    const PASSWORD = '';
+    const PASSWORD = '123';
 
     private $connect;
 
@@ -18,6 +18,11 @@ class Database
             return $this->connect;
         }
         return false;
+    }
+
+    protected function query($sql)
+    {
+        return mysqli_query($this->connect, $sql);
     }
 }
 
