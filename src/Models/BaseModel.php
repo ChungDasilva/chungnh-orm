@@ -37,10 +37,10 @@ class BaseModel extends DataBase
         $tableName = $this->tableName;
         switch (count($params)) {
             case 3:
-
-                $this->sql = "SELECT * FROM $tableName WHERE $params[0] $params[1] '$params[2]'";
+                $this->sql = "SELECT * FROM $tableName WHERE $params[0] $params[1] '$params[2]';";
+                break;
             case 2:
-                $this->sql = "SELECT * FROM $tableName WHERE $params[0] = '$params[1]'";
+                $this->sql = "SELECT * FROM $tableName WHERE $params[0] = '$params[1]';";
                 break;
             case 1:
                 if (is_array($params)) {
@@ -61,18 +61,22 @@ class BaseModel extends DataBase
         return $this;
     }
 
-    protected function hasMany($table, $column, $id = 'id')
+    protected function hasMany($model, $column, $id = 'id')
     {
+        $modelObj = new $model;
+        $tableName = $modelObj->tableName;
     	$id = $this->{$id};
-        $this->sql = "SELECT * FROM $table  WHERE $column = $id;";
-        return $this->get();
+        $modelObj->sql = "SELECT * FROM $tableName  WHERE $column = $id;";
+        return $modelObj->get();
     }
 
-    protected function belongsTo($table, $column, $id = 'id')
+    protected function belongsTo($model, $column, $id = 'id')
     {
-    	$id = $this->{$id};
-        $this->sql = "SELECT * FROM $table  WHERE $column = $id;";
-        return $this->get();
+    	$modelObj = new $model;
+        $tableName = $modelObj->tableName;
+        $id = $this->{$id};
+        $modelObj->sql = "SELECT * FROM $tableName  WHERE $column = $id;";
+        return $modelObj->get();
     }
 
     public function get()
@@ -81,8 +85,10 @@ class BaseModel extends DataBase
         $list = [];
         if ($result) {
             while ($obj = $result->fetch_object()) {
-                $this->cast($obj);
-                $list[] = $this;
+                $ref = new \ReflectionClass($this);
+                $tableObj = $ref->newInstance();
+                $tableObj->cast($obj);
+                $list[] = $tableObj;
             }
         }
 

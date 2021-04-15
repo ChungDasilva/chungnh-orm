@@ -7,6 +7,6 @@ class Blog extends BaseModel
 
     public function comments()
     {
-        return $this->hasMany('comments', 'target_id');
+        return $this->hasMany('ORM\Models\Comment', 'target_id');
     }
 }

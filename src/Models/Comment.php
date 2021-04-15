@@ -7,6 +7,6 @@ class Comment extends BaseModel
 
     public function blog()
     {
-    	return $this->belongsTo('blogs', 'id', 'target_id');
+    	return $this->belongsTo('ORM\Models\Blog', 'id', 'target_id');
     }
 }
