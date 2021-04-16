@@ -1,0 +1,24 @@
+services:
+
+  postgres_db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: mydb
+
+  mysql_db:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: mydb
+      MYSQL_ROOT_USERNAME: root
+      MYSQL_ROOT_PASSWORD: 123
+
+  php-fpm:
+    image: php:7.2-fpm

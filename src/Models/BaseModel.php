@@ -1,15 +1,16 @@
 <?php
 namespace ORM\Models;
 
-use ORM\Core\DataBase;
+use ORM\Core\ConnectData;
 
-class BaseModel extends DataBase
+class BaseModel
 {
     private $sql;
+    private $connection;
 
     public function __construct()
     {
-        $this->connect();
+        $this->connection = ConnectData::connect();
     }
 
     public static function __callStatic($method, $params)
@@ -81,15 +82,13 @@ class BaseModel extends DataBase
 
     public function get()
     {
-        $result = $this->query($this->sql);
+        $result = $this->connection->query($this->sql);
+        $ref = new \ReflectionClass($this);
         $list = [];
-        if ($result) {
-            while ($obj = $result->fetch_object()) {
-                $ref = new \ReflectionClass($this);
-                $tableObj = $ref->newInstance();
-                $tableObj->cast($obj);
-                $list[] = $tableObj;
-            }
+        foreach ($result as $obj) {
+            $tableObj = $ref->newInstance();
+            $tableObj->cast($obj);
+            $list[] = $tableObj;
         }
 
         if (count($list) == 1) {
